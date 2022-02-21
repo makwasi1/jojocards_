@@ -1,4 +1,4 @@
-
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
 import 'package:jojocards/screens/sign_up.dart';
@@ -52,7 +52,19 @@ class _WelcomePageState extends State<WelcomePage> {
             alignment: Alignment(_logoHorizontalAlignment, _topAlignment),
             duration: _transitionDuration,
             curve: _curve ?? Curves.easeInOutBack,
-            child: Image.asset("assets/images/logo_black.png"),
+            child: Text.rich(TextSpan(
+              style: TextStyle(
+                  fontFamily: 'Cresta',
+                  fontSize: 65,
+                  color: Colors.black,
+                  height: 0.8888888888888888,
+                  fontWeight: FontWeight.bold),
+              children: [
+                TextSpan(text: "Truth"),
+                TextSpan(text: "\n       Or", style: TextStyle(fontSize: 40)),
+                TextSpan(text: "\n Dare"),
+              ],
+            )),
             onEnd: _animateButton,
           ),
           AnimatedAlign(

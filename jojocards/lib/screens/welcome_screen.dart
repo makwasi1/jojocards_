@@ -2,18 +2,11 @@
 
 import 'dart:async';
 
-import 'package:animate_do/animate_do.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:jojocards/screens/login_screen.dart';
-import 'package:jojocards/core/string_extensions.dart';
-import 'package:jojocards/screens/sign_up.dart';
 import 'package:jojocards/screens/splashview.dart';
 import 'package:jojocards/shared/colors.dart';
-import 'package:jojocards/shared/images.dart';
-import 'package:jojocards/shared/typography.dart';
 import 'package:jojocards/utils/no_animation_navigator.dart';
 
 
@@ -91,17 +84,40 @@ class SplashViewState extends State<SplashView> {
           ),
           Align(
             alignment: Alignment.center,
-            child: Image.asset("assets/images/logo_black.png"),
+            child: Text.rich(TextSpan(
+            
+              style: TextStyle(
+                  fontFamily: 'Cresta',
+                  
+                  fontSize: 65,
+                  color: Colors.black,
+                  height: 0.8888888888888888,
+                  fontWeight: FontWeight.w900),
+              children: [
+                TextSpan(text: "Truth"),
+                TextSpan(text: "\n       Or", style: TextStyle(fontSize: 40)),
+                TextSpan(text: "\n Dare"),
+              ],
+            )),
           ),
+
           AnimatedPositioned(
             duration: _transitionAnimationDuration,
             bottom: _itcLogoOffset,
             left: 0,
             right: 0,
             curve: Curves.bounceOut,
-            child: Text("jojocards_", textAlign: TextAlign.center, style: TextStyle(fontFamily: 'calibri-bold', fontSize: 40, fontWeight: FontWeight.w900)),
+            child: Column(
+              children: [
+                Text("jojocards_", textAlign: TextAlign.center, style: TextStyle(fontFamily: 'Century Gothic Bold', 
+                fontSize: 40, fontWeight: FontWeight.w900)),
+                Text("A product of jojocards_ and innovations", textAlign: TextAlign.center, 
+                style: TextStyle(fontFamily: 'Century Gothic Bold', fontSize: 10, fontWeight: FontWeight.w900)),
+              ],
+            ),
             onEnd: _navigateToWelcomePage,
           ),
+          
         ],
       ),
         );

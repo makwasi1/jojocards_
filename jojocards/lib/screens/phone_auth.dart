@@ -22,6 +22,7 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
 
   int start = 30;
   bool wait = false;
+  Timer _timer;
   String buttonName = "Send";
   TextEditingController phoneController = TextEditingController();
   AuthClass authClass = AuthClass();
@@ -135,7 +136,7 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
 
   void startTimer() {
     const onsec = Duration(seconds: 1);
-    Timer _timer = Timer.periodic(onsec, (timer) {
+     _timer = Timer.periodic(onsec, (timer) {
       if (start == 0) {
         setState(() {
           timer.cancel();
@@ -230,5 +231,11 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
       verificationIdFinal = verificationId;
     });
     startTimer();
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
   }
 }

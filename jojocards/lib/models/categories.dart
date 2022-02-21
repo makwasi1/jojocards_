@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
 class Category {
@@ -22,7 +23,8 @@ class Category {
       this.imageName});
 }
 
-class PlaceInfo {
+class PlaceInfo extends Equatable{
+  String id;
   String name;
   String category;
   String location;
@@ -30,7 +32,44 @@ class PlaceInfo {
   Color startColor;
   Color endColor;
   Widget route;
+  bool isCompleted;
+  bool isCancelled;
 
-  PlaceInfo(this.name, this.startColor, this.endColor, this.rating,
-      this.location, this.category, this.route);
+  PlaceInfo({@required this.id,@required this.name,this.startColor,
+    @required this.endColor,@required this.rating,
+    @required this.location, @required this.category,
+    @required this.route, this.isCompleted, this.isCancelled}){
+    isCancelled = isCancelled ?? false;
+    isCompleted = isCompleted ?? false;
+  }
+
+  PlaceInfo copyWith({
+    String id,
+    String name,
+    String category,
+    String location,
+    String rating,
+    Color startColor,
+    Color endColor,
+    Widget route,
+    bool isCompleted,
+    bool isCancelled,
+}) {
+    return PlaceInfo(
+        id: id ?? this.id,
+        name: name ?? this.name,
+        startColor: startColor ?? this.startColor,
+        endColor: endColor ?? this.endColor,
+        rating: rating ?? this.rating,
+        location: location ?? this.location,
+        category: category ?? this.category,
+        route: route ?? this.route,
+        isCancelled: isCancelled ?? this.isCancelled,
+        isCompleted: isCompleted ?? this.isCompleted
+    );
+  }
+
+  @override
+  // TODO: implement props
+  List<Object> get props => [id,name,endColor,startColor,rating,location,category,route,isCancelled,isCompleted];
 }
