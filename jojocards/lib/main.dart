@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,6 +10,7 @@ import 'package:jojocards/screens/couplespage.dart';
 import 'package:jojocards/screens/girlspage.dart';
 import 'package:jojocards/screens/home_page.dart';
 import 'package:jojocards/screens/kidspage.dart';
+import 'package:jojocards/screens/ratings_page.dart';
 import 'package:jojocards/screens/sign_up.dart';
 import 'package:jojocards/screens/squadpage.dart';
 import 'package:jojocards/screens/welcome_screen.dart';
@@ -33,11 +36,19 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   AuthClass authClass = AuthClass();
   Widget currentPage = SplashView();
-
+  final RatingService _ratingService = RatingService();
   @override
   void initState() {
     super.initState();
     checkLogin();
+
+    Timer(const Duration(seconds: 2), () {
+      _ratingService.isSecondTimeOpen().then((secondOpen) {
+        if (secondOpen) {
+          _ratingService.showRating();
+        }
+      });
+    });
   }
 
   checkLogin() async {
@@ -45,18 +56,18 @@ class _MyAppState extends State<MyApp> {
     print(token);
     if (token != null) {
       setState(() {
-        currentPage = CategoryButtonBar();
+        currentPage = const HomePage();
       });
     } else {
       setState(() {
-        currentPage =  SplashView();
+        currentPage =  const SplashView();
       });
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    
+
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => CardBloc()..add(LoadCard(
@@ -84,20 +95,17 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(fontFamily: 'Calibri'),
         home: Scaffold(
-          body: HomePage()
+          body: currentPage
         ),
       ),
     );
   }
 }
 
-
 // class MyApp extends StatelessWidget {
 //   const MyApp({Key key}) : super(key: key);
 
 //   @override
-
-
 
 //   Widget build(BuildContext context) {
 //     return const MaterialApp(

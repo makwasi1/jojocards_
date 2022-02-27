@@ -23,7 +23,8 @@ class Category {
       this.imageName});
 }
 
-class PlaceInfo extends Equatable{
+// ignore: empty_constructor_bodies
+class PlaceInfo extends Equatable {
   String id;
   String name;
   String category;
@@ -35,10 +36,17 @@ class PlaceInfo extends Equatable{
   bool isCompleted;
   bool isCancelled;
 
-  PlaceInfo({@required this.id,@required this.name,this.startColor,
-    @required this.endColor,@required this.rating,
-    @required this.location, @required this.category,
-    @required this.route, this.isCompleted, this.isCancelled}){
+  PlaceInfo(
+      {@required this.id,
+      @required this.name,
+      this.startColor,
+      @required this.endColor,
+      @required this.rating,
+      @required this.location,
+      @required this.category,
+      @required this.route,
+      this.isCompleted,
+      this.isCancelled}) {
     isCancelled = isCancelled ?? false;
     isCompleted = isCompleted ?? false;
   }
@@ -49,12 +57,12 @@ class PlaceInfo extends Equatable{
     String category,
     String location,
     String rating,
-    Color startColor,
-    Color endColor,
-    Widget route,
+    String startColor,
+    String endColor,
+    String route,
     bool isCompleted,
     bool isCancelled,
-}) {
+  }) {
     return PlaceInfo(
         id: id ?? this.id,
         name: name ?? this.name,
@@ -65,11 +73,52 @@ class PlaceInfo extends Equatable{
         category: category ?? this.category,
         route: route ?? this.route,
         isCancelled: isCancelled ?? this.isCancelled,
-        isCompleted: isCompleted ?? this.isCompleted
-    );
+        isCompleted: isCompleted ?? this.isCompleted);
   }
 
   @override
   // TODO: implement props
-  List<Object> get props => [id,name,endColor,startColor,rating,location,category,route,isCancelled,isCompleted];
+  List<Object> get props => [
+        id,
+        name,
+        endColor,
+        startColor,
+        rating,
+        location,
+        category,
+        route,
+        isCancelled,
+        isCompleted
+      ];
+
+  PlaceInfo.fromMap(Map<String, dynamic> map)
+      : id = map['id'],
+        name = map['name'],
+        category = map['category'],
+        location = map['location'],
+        rating = map['rating'],
+        // startColor = map['startColor'],
+        // endColor = map['endColor'],
+        // route = map['route'],
+        isCompleted = map['isCompleted'],
+        isCancelled = map['isCancelled'];
+
+  UpdateInfo() {
+    isCompleted = true;
+  }
+
+  Map toMap(){
+    return {
+      'id':id,
+      'name':name,
+      'category':category,
+      'location':location,
+      'rating':rating,
+      // 'startColor':startColor,
+      // // 'endColor' :endColor,
+      // 'route' :route,
+      'isCompleted':isCompleted,
+      'isCancelled' :isCancelled,
+    };
+  }
 }

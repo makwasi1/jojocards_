@@ -15,6 +15,7 @@ class CardFilterLoaded extends CardFilterState {
 
   const CardFilterLoaded({@required this.filterCards, this.cardsFilter = CategoryFilter.all});
 
+  @override
   List<Object> get props => [
     filterCards,
     cardsFilter

@@ -16,7 +16,7 @@ class BlackButton extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(_borderRadius)),
       elevation: 0,
       onPressed: onTap,
-      color: Colors.black,
+      color:Color(0xFFA9443F),
       padding: const EdgeInsets.symmetric(vertical: Dim.d24),
       child: SizedBox(
         width: double.infinity,

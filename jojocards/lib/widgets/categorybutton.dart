@@ -90,9 +90,9 @@ class _CategoryButtonBarState extends State<CategoryButtonBar> {
   int _currentIndex = 0;
 
   final List<Widget> _children = [
-    HomePage(),
-    FavoritePage(),
-    SettingsPage(),
+    // HomePage(),
+    // FavoritePage(),
+    // SettingsPage(),
   ];
 
    void _onItemTapped(int index) {

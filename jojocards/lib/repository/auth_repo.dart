@@ -29,7 +29,7 @@ class AuthClass {
         storeTokenAndData(userCredential);
         Navigator.pushAndRemoveUntil(
             context,
-            MaterialPageRoute(builder: (builder) => CategoryButtonBar()),
+            MaterialPageRoute(builder: (builder) => HomePage()),
             (route) => false);
 
         final snackBar =
@@ -113,13 +113,53 @@ class AuthClass {
       storeTokenAndData(userCredential);
       Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (builder) => CategoryButtonBar()),
+          MaterialPageRoute(builder: (builder) => const HomePage()),
           (route) => false);
 
       showSnackBar(context, "logged In");
     } catch (e) {
       showSnackBar(context, e.toString());
     }
+  }
+
+ //login with email and password
+  Future<void> signInWithCredentials(String email, String password, BuildContext context) async {
+    try{
+      _auth.signInWithEmailAndPassword(
+          email: email, password: password);
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (builder) => const HomePage()),
+              (route) => false);
+      showSnackBar(context, "logged In");
+    } catch(e) {
+      showSnackBar(context, e.toString());
+    }
+
+  }
+
+  Future<void> signUp(String email, String password, BuildContext context) async {
+    try{
+      _auth.signInWithEmailAndPassword(
+          email: email, password: password);
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (builder) => const HomePage()),
+              (route) => false);
+      showSnackBar(context, "logged In");
+    } catch(e) {
+      showSnackBar(context, e.toString());
+    }
+  }
+
+
+  Future<bool> isSignedIn() async {
+    final currentUser = _auth.currentUser;
+    return currentUser != null;
+  }
+
+  Future<User> getUser() async {
+    return _auth.currentUser;
   }
 
   void showSnackBar(BuildContext context, String s) {

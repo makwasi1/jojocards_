@@ -24,8 +24,9 @@ class _SignUpState extends State<SignUp> {
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           decoration: const BoxDecoration(
-            gradient:
-          LinearGradient(colors: [Color(0xFFF25B5C), Color(0xFFA9443F)])
+          //   gradient:
+          // LinearGradient(colors: [Color(0xFFF25B5C), Color(0xFFA9443F)]),
+          image: DecorationImage(image: AssetImage("assets/images/cover22.jpeg"), fit: BoxFit.cover)
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -36,7 +37,7 @@ class _SignUpState extends State<SignUp> {
                 style: AppTypography.extraBold48,
               ),
               const SizedBox(
-                height: 200,
+                height: 300,
               ),
               buttonItem("assets/google.svg", "Continue with Google", 25,
                   () async {
@@ -65,7 +66,7 @@ class _SignUpState extends State<SignUp> {
                   const Text(
                     "If you already have an Account? ",
                     style: TextStyle(
-                      color: Colors.black,
+                      color: Colors.deepOrange,
                       fontSize: 16,
                     ),
                   ),
@@ -80,7 +81,7 @@ class _SignUpState extends State<SignUp> {
                     child: const Text(
                       "Login",
                       style: TextStyle(
-                        color: Colors.black,
+                        color: Colors.white,
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
                       ),
@@ -103,13 +104,13 @@ class _SignUpState extends State<SignUp> {
         width: MediaQuery.of(context).size.width - 60,
         height: 60,
         child: Card(
-          color: Colors.black,
+          color: Color(0xFFA9443F),
           elevation: 8,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15),
             side: const BorderSide(
               width: 1,
-              color: Colors.black,
+              color:Color(0xFFA9443F),
             ),
           ),
           child: Row(

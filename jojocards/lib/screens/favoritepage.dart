@@ -1,39 +1,165 @@
+import 'dart:ui';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class FavoritePage extends StatefulWidget {
-  const FavoritePage({ Key key }) : super(key: key);
+// class CustomDialogBox extends StatefulWidget {
+//   final String title, descriptions;
+//   Function onClick;
 
-  @override
-  _FavoritePageState createState() => _FavoritePageState();
-}
+//   CustomDialogBox({Key key, this.title, this.descriptions, this.onClick})
+//       : super(key: key);
 
-class _FavoritePageState extends State<FavoritePage> {
+//   @override
+//   _CustomDialogBoxState createState() => _CustomDialogBoxState();
+// }
+
+// class _CustomDialogBoxState extends State<CustomDialogBox> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Dialog(
+//       shape: RoundedRectangleBorder(
+//         borderRadius: BorderRadius.circular(Constants.padding),
+//       ),
+//       elevation: 0,
+//       backgroundColor: Colors.transparent,
+//       child: contentBox(context),
+//     );
+//   }
+
+//   contentBox(context) {
+//     return Stack(
+//       children: <Widget>[
+//         Container(
+//           padding: EdgeInsets.only(
+//               left: Constants.padding,
+//               top: Constants.avatarRadius + Constants.padding,
+//               right: Constants.padding,
+//               bottom: Constants.padding),
+//           margin: EdgeInsets.only(top: Constants.avatarRadius),
+//           decoration: BoxDecoration(
+//               shape: BoxShape.rectangle,
+//               color: Colors.white,
+//               borderRadius: BorderRadius.circular(Constants.padding),
+//               boxShadow: [
+//                 BoxShadow(
+//                     color: Colors.black, offset: Offset(0, 10), blurRadius: 10),
+//               ]),
+//           child: Column(
+//             mainAxisSize: MainAxisSize.min,
+//             children: <Widget>[
+//               Text(
+//                 widget.title,
+//                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
+//               ),
+//               SizedBox(
+//                 height: 15,
+//               ),
+//               Text(
+//                 widget.descriptions,
+//                 style: TextStyle(fontSize: 14),
+//                 textAlign: TextAlign.center,
+//               ),
+//               SizedBox(
+//                 height: 22,
+//               ),
+//               Align(
+//                 alignment: Alignment.bottomRight,
+//                 child: FlatButton(
+//                   onPressed: () {
+//                     onClick();
+//                   },
+//                    child: Text("Okay",style: TextStyle(fontSize: 18),),
+//                 ),
+//               ),
+//             ],
+//           ),
+//         ),
+        
+//       ],
+//     );
+//   }
+// }
+
+// void onClick() {
+// }
+
+
+
+class CustomDialogBox extends StatelessWidget {
+
+    final String title, descriptions;
+  Function onClick;
+   CustomDialogBox({ Key key, this.title, this.descriptions, this.onClick}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: Icon(Icons.arrow_back)
-        ),
-          centerTitle: true,
-          backgroundColor: Color(0xFFA9443F),
-          actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.exit_to_app),
-            tooltip: 'Log out',
-            onPressed: () {
-              // handle the press
-            },
-          ),
-        ],
-        title: const Text('Favorites'),
+    return Dialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(Constants.padding),
       ),
-  body:  const Center(
-    child: Text("Favorites page"),
-  ),
+      elevation: 0,
+      backgroundColor: Colors.transparent,
+      child: contentBox(context),
     );
   }
+
+  contentBox(context) {
+    return Stack(
+      children: <Widget>[
+        Container(
+          padding: EdgeInsets.only(
+              left: Constants.padding,
+              top: Constants.avatarRadius + Constants.padding,
+              right: Constants.padding,
+              bottom: Constants.padding),
+          margin: EdgeInsets.only(top: Constants.avatarRadius),
+          decoration: BoxDecoration(
+              shape: BoxShape.rectangle,
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(Constants.padding),
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.black, offset: Offset(0, 10), blurRadius: 10),
+              ]),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Text(
+                title,
+                style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Text(
+                descriptions,
+                style: TextStyle(fontSize: 14),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(
+                height: 22,
+              ),
+              Align(
+                alignment: Alignment.bottomRight,
+                child: FlatButton(
+                  onPressed: () {
+                    onClick();
+                  },
+                   child: Text("Okay",style: TextStyle(fontSize: 18),),
+                ),
+              ),
+            ],
+          ),
+        ),
+        
+      ],
+    );
+  }
+}
+
+
+class Constants {
+  Constants._();
+  static const double padding = 20;
+  static const double avatarRadius = 45;
 }

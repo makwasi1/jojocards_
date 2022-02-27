@@ -47,7 +47,11 @@ class _WelcomePageState extends State<WelcomePage> {
     return Scaffold(
       body: Stack(
         children: [
-          Container(color: AppColors.maroonBground),
+          Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(image: AssetImage("assets/images/cover1.jpeg"), fit: BoxFit.cover)
+            )
+          ),
           AnimatedAlign(
             alignment: Alignment(_logoHorizontalAlignment, _topAlignment),
             duration: _transitionDuration,
@@ -59,11 +63,7 @@ class _WelcomePageState extends State<WelcomePage> {
                   color: Colors.black,
                   height: 0.8888888888888888,
                   fontWeight: FontWeight.bold),
-              children: [
-                TextSpan(text: "Truth"),
-                TextSpan(text: "\n       Or", style: TextStyle(fontSize: 40)),
-                TextSpan(text: "\n Dare"),
-              ],
+
             )),
             onEnd: _animateButton,
           ),
