@@ -34,7 +34,7 @@ class RatingService {
         _inAppReview.requestReview();
       } else {
         _inAppReview.openStoreListing(
-          appStoreId: '',
+          appStoreId: 'com.jojocardsug.package',
         );
       }
       return true;

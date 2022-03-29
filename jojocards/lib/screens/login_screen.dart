@@ -17,7 +17,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return  Scaffold(
       appBar: AppBar(
-        title: Text("Register"),
+        title: Text("Login"),
           leading: IconButton(
               onPressed: () {
                 Navigator.pop(context);
@@ -42,6 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 Container(
                   margin: const EdgeInsets.only(bottom: 10),
                   child: TextFormField(
+                    obscureText: true,
                     controller: _password,
                     decoration: const InputDecoration(
                         labelText: "Password"),

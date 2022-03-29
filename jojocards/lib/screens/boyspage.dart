@@ -184,7 +184,7 @@ class _BoysPageState extends State<BoysPage> {
                           '',
                           style: TextStyle(
                             fontFamily: 'Papyrus',
-                            fontSize: 16,
+                            fontSize: 14.4,
                             color: Colors.lightBlue
                           ),
                           textHeightBehavior:
@@ -240,7 +240,7 @@ class Boys {
   static List<String> getBoysDares() {
     return [
       "What is the worst score you’ve ever got in a test? \n Or \n Act drunk for 10 mins.",
-      "Who is the hottest teacher in your school?\t \n Or \n Say a story for 5 mins with your tongue stuck out.",
+      "Who is the hottest teacher in your school? \n Or \n Say a story for 5 mins with your tongue stuck out.",
       "What is the worst class to have as your first in a day? \n Or \n Cling to the leg of your neighbor to the right.",
       "What do you think is better calculations or essays? \n Or \n Randomly scream “scars” until your next turn.",
       "If you had to take one class for the rest of your life,what class would it be? \n Or \n Smell the feet of all the players for 2secs each.",
@@ -253,16 +253,16 @@ class Boys {
       "Who among us here would you trade your life with hers? \n Or \n Smell a dirty sock for 10 mins straight.",
       "When was the last time you told a lie and what was it? \n Or \n Talk in a fake accent until it’s your turn again.",
       "Have you ever cheated on your girlfriend? \n Or \n Spell your crush’s name the other way round.",
-      "What is the most embarrassing thing you have done to attract attention from a guy? \n Or \n Take an embarrassing selfie and post it on your page.",
+      "What is the most embarrassing thing you have done to attract attention from a girl? \n Or \n Take an embarrassing selfie and post it on your page.",
       "What is your worst fear? \n Or \n Brush the teeth of the person sitting on your left.",
       "Have you ever been caught doing something you aren’t supposed to be doing? \n Or \n Wear the bra of the girl on your right.",
       "Who is your latest crush? \n Or \n Sit on the lap of a guy for 10 mins(players choose who).",
-      "Have you ever had a crush on your friends girlfriend? \n Or \n Imitate a chicken for the next 5 minutes.",
+      "Have you ever had a crush on your friend's girlfriend? \n Or \n Imitate a chicken for the next 5 minutes.",
       "What is the best rumor you ever had going around about you? \n Or \n Imitate your least favorite teacher.",
-      "What would you do if you caught your bestfriend with your boyfriend? \n Or \n Close your eyes and describe the worst moment you ever had with your bestfriend.",
+      "What would you do if you caught your bestfriend with your girlfriend? \n Or \n Close your eyes and describe the worst moment you ever had with your bestfriend.",
       "What is the most important thing you have in your room? \n Or \n  Perform a belly dance in the middle of the circle.",
       "What is the stupidest thing you have done in public? \n Or \n  Get into the shower with all your clothes on.",
-      "What is the wildest thing you have done? \n Or \n  Walk a random guy and tell him “i love you”.",
+      "What is the wildest thing you have done? \n Or \n  Walk a random girl and tell her “i love you”.",
       "What is your darkest secret? \n Or \n Wear all your clothes inside out.",
       "What is your favorite pick up line? \n Or \n  Eat something then talk with your mouth full.",
       "What is your worst pick up line? \n Or \n Fill your mouth with water then try singing a song.",
@@ -273,22 +273,23 @@ class Boys {
       "4 words that best describe your ex? \n Or \n Describe what the sky looks like without using words.",
       "Best way for you to end a relationship? \n Or \n Quickly tap 5 body parts you usually get compliments about.",
       "Tell us A cute story about you and your bestfriend? \n Or \n Commentate a football match you’re watching in your mind for 5 mins.",
-      "Who do you prefer mum or dad? \n Or \n Write a note to a random guy saying “you lost your game”.",
-      "What made you laugh until you cried? \n Or \n Say banana after every word you say.",
+      "Who do you prefer, mum or dad? \n Or \n Write a note to a random guy saying “you lost your game”.",
+      "What made you laugh until you cried? \n Or \n Say 'banana' after every word you say.",
       "How did you meet the person you fell hardest for? \n Or \n Act out a boxing match and you’re losing.",
       "How many followers do you have on Instagram? \n Or \n Tell a rumor about one of the players with a bit of truth in it.",
-      "Do you prefer tiktok? \n Or \n Snapchat or imitate Da Baby for the next 10mins.",
+      "Do you prefer tiktok or snapchat? \n Or \n Imitate Da Baby for the next 10mins.",
       "Who is your celebrity crush and why? \n Or \n Moonwalk to a spot the players choose.",
-      "When you were a kid,what did you want to become when you grow up.",
-      "Beaches or mountain climbing? \n Or \n Give a toe massage to the person on your left.",
+      "When you were a kid,what did you want to become when you grow up? \n Or \n Quickly spell 'photosynthesis' in 3 secs.",
+      "Beaches or mountain climbing? \n Or \n Give a toe massage to the person on your left for the next 10 secs.",
       "Whats the strangest place you’ve ever gone potty? \n Or \n Go around the room smelling the players armpits.",
       "If you could relive one day in your life,what day would it be? \n Or \n Go outside and lecture the current weather for 5mins.",
-      "If your.life was a novel, what title would it be? \n Or \n Market an object like it’s your product for 10mins.",
+      "If your life was a novel, what title would it be and why? \n Or \n Market an object like it’s your product for 10mins.",
       "What are your phobias? \n Or \n Talk to an object like its your crush.",
       "What did you learn a little too late? \n Or \n Color one of your front teeth black.",
       "What habits do you have that annoy other people? \n Or \n Pretend that you are under water for 5mins.",
       "What do you most look forward to about adulthood? \n Or \n Have a full conversation with yourself in the mirror.",
       "What makes you angrier than it should? \n Or \n Talk without closing your mouth for 10secs.",
+      "What is your current favorite song?  \n Or \n Make up a rumour about your least favorite person in the game."
     ];
   }
 }

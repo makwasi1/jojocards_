@@ -39,9 +39,10 @@ class _SignUpState extends State<SignUp> {
               const SizedBox(
                 height: 300,
               ),
-              buttonItem("assets/google.svg", "Continue with Google", 25,
-                  () async {
-                await AuthClass().googleSignIn(context);
+              buttonItem("assets/google.svg", "Continue with Email&Password", 25,
+                  () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (builder) => const LoginScreen()));
               }),
               const SizedBox(
                 height: 15,

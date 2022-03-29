@@ -193,7 +193,7 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
           prefixIcon: Padding(
             padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 15),
             child: Text(
-              " (+256) ",
+              " (+256) 0",
               style: TextStyle(color: Colors.black, fontSize: 17),
             ),
           ),

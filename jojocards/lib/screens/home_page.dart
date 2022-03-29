@@ -30,6 +30,8 @@ import 'package:jojocards/widgets/categorybutton.dart';
 import 'package:jojocards/widgets/categorycard.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:pay/pay.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key key}) : super(key: key);
@@ -82,6 +84,14 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     sharedPreferences = await SharedPreferences.getInstance();
     loadData();
   }
+
+  static const _paymentItems = [
+    PaymentItem(
+      label: 'Total',
+      amount: '99.99',
+      status: PaymentItemStatus.final_price,
+    )
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -164,6 +174,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   }
 
   BlocBuilder<CardFilterBloc, CardFilterState> _cards(String title) {
+    void onGooglePayResult(paymentResult) {
+      debugPrint(paymentResult.toString());
+    }
+
     return BlocBuilder<CardFilterBloc, CardFilterState>(
       builder: (context, state) {
         if (state is CardFilterLoading) {
@@ -184,121 +198,249 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                         onCardClick: () {
                           setRef();
                           if (title == 'Selected Packs') {
-                            showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return AlertDialog(
-                                    scrollable: true,
-                                    title: Text('Process Payment'),
-                                    content: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Stack(
-                                        children: <Widget>[
-                                          Padding(
-                                            padding: const EdgeInsets.all(10.0),
-                                            child: Column(
-                                              children: [
-                                                Container(
-                                                  margin: const EdgeInsets.only(
-                                                      bottom: 10),
-                                                  child: TextFormField(
-                                                    controller: _email,
-                                                    decoration:
-                                                        const InputDecoration(
-                                                            labelText: "Email"),
-                                                  ),
-                                                ),
-                                                Container(
-                                                  margin: const EdgeInsets.only(
-                                                      bottom: 10),
-                                                  child: TextFormField(
-                                                    controller: _phone,
-                                                    decoration:
-                                                        const InputDecoration(
-                                                            labelText:
-                                                                "Phone Number"),
-                                                  ),
-                                                ),
-                                                Container(
-                                                  margin: const EdgeInsets.only(
-                                                      bottom: 10),
-                                                  child: TextFormField(
-                                                    controller: _amount,
-                                                    decoration:
-                                                        const InputDecoration(
-                                                            labelText:
-                                                                "Amount"),
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                          ),
+                            _launchURL();
+                            // showDialog(
+                            //     context: context,
+                            //     builder: (BuildContext context) {
+                            //       return GooglePayButton(
+                            //         paymentConfigurationAsset:
+                            //             'gpay.json',
+                            //         paymentItems: _paymentItems,
+                            //         style: GooglePayButtonStyle.black,
+                            //         type: GooglePayButtonType.pay,
+                            //         margin: const EdgeInsets.only(top: 15.0),
+                            //         onPaymentResult: onGooglePayResult,
+                            //         loadingIndicator: const Center(
+                            //           child: CircularProgressIndicator(),
+                            //         ),
+                            //       );
+                            // return AlertDialog(
+                            //   scrollable: true,
+                            //   title: Text('Process Payment'),
+                            //   content: Padding(
+                            //     padding: const EdgeInsets.all(8.0),
+                            //     child: Stack(
+                            //       children: <Widget>[
+                            //         Padding(
+                            //           padding: const EdgeInsets.all(10.0),
+                            //           child: Column(
+                            //             children: [
+                            //               Container(
+                            //                 margin: const EdgeInsets.only(
+                            //                     bottom: 10),
+                            //                 child: TextFormField(
+                            //                   controller: _email,
+                            //                   decoration:
+                            //                       const InputDecoration(
+                            //                           labelText: "Email"),
+                            //                 ),
+                            //               ),
+                            //               Container(
+                            //                 margin: const EdgeInsets.only(
+                            //                     bottom: 10),
+                            //                 child: TextFormField(
+                            //                   controller: _phone,
+                            //                   decoration:
+                            //                       const InputDecoration(
+                            //                           labelText:
+                            //                               "Phone Number"),
+                            //                 ),
+                            //               ),
+                            //               Container(
+                            //                 margin: const EdgeInsets.only(
+                            //                     bottom: 10),
+                            //                 child: TextFormField(
+                            //                   controller: _amount,
+                            //                   decoration:
+                            //                       const InputDecoration(
+                            //                           labelText:
+                            //                               "Amount"),
+                            //                 ),
+                            //               )
+                            //             ],
+                            //           ),
+                            //         ),
 
-                                          // Container(
-                                          //   margin:
-                                          //       const EdgeInsets.only(bottom: 10),
-                                          //   child: TextFormField(
-                                          //     controller: _amount,
-                                          //     decoration: const InputDecoration(
-                                          //         labelText: "Amount"),
-                                          //   ),
-                                          // ),
-                                          Positioned(
-                                            bottom: 0,
-                                            child: GestureDetector(
-                                              onTap: () {
-                                                final email = _email.text;
-                                                final phone = _phone.text;
+                            //         // Container(
+                            //         //   margin:
+                            //         //       const EdgeInsets.only(bottom: 10),
+                            //         //   child: TextFormField(
+                            //         //     controller: _amount,
+                            //         //     decoration: const InputDecoration(
+                            //         //         labelText: "Amount"),
+                            //         //   ),
+                            //         // ),
+                            //         Positioned(
+                            //           bottom: 0,
+                            //           child: GestureDetector(
+                            //             onTap: () {
+                            //               final email = _email.text;
+                            //               final phone = _phone.text;
 
-                                                if (email.isEmpty ||
-                                                    phone.isEmpty) {
-                                                  ScaffoldMessenger.of(context)
-                                                      .showSnackBar(const SnackBar(
-                                                          content: Text(
-                                                              "Field are empty")));
-                                                } else {
-                                                  ///Flutterwave Payment
-                                                  _makePayment(
-                                                    context,
-                                                    email.trim(),
-                                                    phone.trim(),
-                                                    state.filterCards[index],
-                                                  );
-                                                }
-                                              },
-                                              child: Container(
-                                                padding:
-                                                    const EdgeInsets.all(20),
-                                                width: MediaQuery.of(context)
-                                                    .size
-                                                    .width,
-                                                color: Colors.lightBlue,
-                                                child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    children: const [
-                                                      ///Icon
-                                                      Icon(Icons.payment),
+                            //               if (email.isEmpty ||
+                            //                   phone.isEmpty) {
+                            //                 ScaffoldMessenger.of(context)
+                            //                     .showSnackBar(const SnackBar(
+                            //                         content: Text(
+                            //                             "Field are empty")));
+                            //               } else {
+                            //                 ///Flutterwave Payment
+                            //                 _makePayment(
+                            //                   context,
+                            //                   email.trim(),
+                            //                   phone.trim(),
+                            //                   state.filterCards[index],
+                            //                 );
+                            //               }
+                            //             },
+                            //             child: Container(
+                            //               padding:
+                            //                   const EdgeInsets.all(20),
+                            //               width: MediaQuery.of(context)
+                            //                   .size
+                            //                   .width,
+                            //               color: Colors.lightBlue,
+                            //               child: Row(
+                            //                   mainAxisAlignment:
+                            //                       MainAxisAlignment.start,
+                            //                   children: const [
+                            //                     ///Icon
+                            //                     Icon(Icons.payment),
 
-                                                      Text(
-                                                        "  Make Payment",
-                                                        style: TextStyle(
-                                                            fontSize: 20,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
-                                                        textAlign:
-                                                            TextAlign.left,
-                                                      ),
-                                                    ]),
-                                              ),
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  );
-                                });
+                            //                     Text(
+                            //                       "  Make Payment",
+                            //                       style: TextStyle(
+                            //                           fontSize: 20,
+                            //                           fontWeight:
+                            //                               FontWeight
+                            //                                   .bold),
+                            //                       textAlign:
+                            //                           TextAlign.left,
+                            //                     ),
+                            //                   ]),
+                            //             ),
+                            //           ),
+                            //         )
+                            //       ],
+                            //     ),
+                            //   ),
+                            // );
+                            // });
+                            // showDialog(
+                            //     context: context,
+                            //     builder: (BuildContext context) {
+                            //       return AlertDialog(
+                            //         scrollable: true,
+                            //         title: Text('Process Payment'),
+                            //         content: Padding(
+                            //           padding: const EdgeInsets.all(8.0),
+                            //           child: Stack(
+                            //             children: <Widget>[
+                            //               Padding(
+                            //                 padding: const EdgeInsets.all(10.0),
+                            //                 child: Column(
+                            //                   children: [
+                            //                     Container(
+                            //                       margin: const EdgeInsets.only(
+                            //                           bottom: 10),
+                            //                       child: TextFormField(
+                            //                         controller: _email,
+                            //                         decoration:
+                            //                             const InputDecoration(
+                            //                                 labelText: "Email"),
+                            //                       ),
+                            //                     ),
+                            //                     Container(
+                            //                       margin: const EdgeInsets.only(
+                            //                           bottom: 10),
+                            //                       child: TextFormField(
+                            //                         controller: _phone,
+                            //                         decoration:
+                            //                             const InputDecoration(
+                            //                                 labelText:
+                            //                                     "Phone Number"),
+                            //                       ),
+                            //                     ),
+                            //                     Container(
+                            //                       margin: const EdgeInsets.only(
+                            //                           bottom: 10),
+                            //                       child: TextFormField(
+                            //                         controller: _amount,
+                            //                         decoration:
+                            //                             const InputDecoration(
+                            //                                 labelText:
+                            //                                     "Amount"),
+                            //                       ),
+                            //                     )
+                            //                   ],
+                            //                 ),
+                            //               ),
+
+                            //               // Container(
+                            //               //   margin:
+                            //               //       const EdgeInsets.only(bottom: 10),
+                            //               //   child: TextFormField(
+                            //               //     controller: _amount,
+                            //               //     decoration: const InputDecoration(
+                            //               //         labelText: "Amount"),
+                            //               //   ),
+                            //               // ),
+                            //               Positioned(
+                            //                 bottom: 0,
+                            //                 child: GestureDetector(
+                            //                   onTap: () {
+                            //                     final email = _email.text;
+                            //                     final phone = _phone.text;
+
+                            //                     if (email.isEmpty ||
+                            //                         phone.isEmpty) {
+                            //                       ScaffoldMessenger.of(context)
+                            //                           .showSnackBar(const SnackBar(
+                            //                               content: Text(
+                            //                                   "Field are empty")));
+                            //                     } else {
+                            //                       ///Flutterwave Payment
+                            //                       _makePayment(
+                            //                         context,
+                            //                         email.trim(),
+                            //                         phone.trim(),
+                            //                         state.filterCards[index],
+                            //                       );
+                            //                     }
+                            //                   },
+                            //                   child: Container(
+                            //                     padding:
+                            //                         const EdgeInsets.all(20),
+                            //                     width: MediaQuery.of(context)
+                            //                         .size
+                            //                         .width,
+                            //                     color: Colors.lightBlue,
+                            //                     child: Row(
+                            //                         mainAxisAlignment:
+                            //                             MainAxisAlignment.start,
+                            //                         children: const [
+                            //                           ///Icon
+                            //                           Icon(Icons.payment),
+
+                            //                           Text(
+                            //                             "  Make Payment",
+                            //                             style: TextStyle(
+                            //                                 fontSize: 20,
+                            //                                 fontWeight:
+                            //                                     FontWeight
+                            //                                         .bold),
+                            //                             textAlign:
+                            //                                 TextAlign.left,
+                            //                           ),
+                            //                         ]),
+                            //                   ),
+                            //                 ),
+                            //               )
+                            //             ],
+                            //           ),
+                            //         ),
+                            //       );
+                            //     });
                           }
                           // if (title == 'Selected Packs') {
                           //   Navigator.push(
@@ -355,21 +497,30 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     );
   }
 
+  _launchURL() async {
+    const url = 'https://flutter.io';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   _makePayment(
       BuildContext context, String email, String phone, PlaceInfo cards) async {
     try {
       Flutterwave flutterwave = Flutterwave.forUIPayment(
         context: this.context,
-        publicKey: "FLWPUBK_TEST-17d7af6e9da379a0c6ab45090fcaffb3-X",
-        encryptionKey: "FLWSECK_TEST32d6d1abe8e3",
+        publicKey: "FLWPUBK-77e82baefb89c52adda7c6e46e015abb-X",
+        encryptionKey: "a808d1584c915b150012a9e7",
         currency: "UGX",
-        amount: '300',
+        amount: '30000',
         email: email,
         acceptCardPayment: true,
         acceptUSSDPayment: true,
         fullName: email,
         txRef: _ref,
-        isDebugMode: true,
+        isDebugMode: false,
         phoneNumber: phone,
       );
 
@@ -381,9 +532,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       } else {
         ///
         if (response.status == "success") {
-          // context.read<CardBloc>().add(UpdateCard(
-          //       card: cards.copyWith(isCompleted: true),
-          //     ));
           Navigator.pop(context);
           tabController.animateTo((tabController.index + 1) % 2);
 
@@ -580,7 +728,7 @@ Widget buildListTile(PlaceInfo item, int index, BuildContext context) {
                     "1. Pick a card from the deck and ask the player which option they go for “truth” or “dare”. \n 2.Read the question incase the player chooses “truth”. \n 3.Read the dare incase the player chooses “dare”. After the player is done,all participants of the game can share their answers/opinions on the questions if they want to. \n A player is allowed to pass the dare if its not applicable to them and get another question or dare. ",
                 onClick: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => GilrsPage()));
+                      MaterialPageRoute(builder: (context) => KidsPage()));
                 },
               );
             });

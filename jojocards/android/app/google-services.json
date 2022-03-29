@@ -1,41 +1,41 @@
 {
   "project_info": {
-    "project_number": "656243094679",
-    "project_id": "jojocards-b767f",
-    "storage_bucket": "jojocards-b767f.appspot.com"
+    "project_number": "393165214924",
+    "project_id": "jojocards-f398c",
+    "storage_bucket": "jojocards-f398c.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:656243094679:android:f9c5fe283ea4c83d25a5d2",
+        "mobilesdk_app_id": "1:393165214924:android:ecbdf4395c9c06e1499e69",
         "android_client_info": {
-          "package_name": "com.example.jojocards"
+          "package_name": "com.jojocardsug.package"
         }
       },
       "oauth_client": [
         {
-          "client_id": "656243094679-n7t37v7ur8prmf867auf6q7as5u15gc5.apps.googleusercontent.com",
+          "client_id": "393165214924-6v36sc890d7k493jk2i0en7ce0p2nu9b.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.jojocards",
+            "package_name": "com.jojocardsug.package",
             "certificate_hash": "f424dccca411b050274f16cc402841736d4c4e53"
           }
         },
         {
-          "client_id": "656243094679-if46qet3625m53iqpl26a7bfoc1u6h9b.apps.googleusercontent.com",
+          "client_id": "393165214924-6uliefv094d8b8k605ukhiaouh4gj0ll.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDTLtDI5NKfi6jUaFZnp-HPy9KStha_ZP8"
+          "current_key": "AIzaSyBtCYtmE76KEaOkCag2xSHOFwbTSQPN6ag"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "656243094679-if46qet3625m53iqpl26a7bfoc1u6h9b.apps.googleusercontent.com",
+              "client_id": "393165214924-6uliefv094d8b8k605ukhiaouh4gj0ll.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

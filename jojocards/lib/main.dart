@@ -95,7 +95,7 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(fontFamily: 'Calibri'),
         home: Scaffold(
-          body: currentPage
+          body: HomePage()
         ),
       ),
     );
